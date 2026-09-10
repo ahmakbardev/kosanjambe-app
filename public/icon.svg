@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="112" fill="#e4ee64" />
+  <!-- Atap + badan rumah, digambar pakai path biar nggak gantung sama font
+       yang belum tentu ada di HP orang. -->
+  <path
+    d="M256 112 116 236v164h96V296h88v104h96V236z"
+    fill="#141414"
+  />
+</svg>
