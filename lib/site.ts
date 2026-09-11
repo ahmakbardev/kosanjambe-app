@@ -12,11 +12,20 @@ export const APP_NAME = "kosanjambe";
 export const webUrl = (path = "/") => `${WEB_URL}${path}`;
 
 /**
- * Saklar layar "download aplikasinya" yang nutup app kalau dibuka dari browser
+ * Saklar layar "pasang aplikasinya" yang nutup app kalau dibuka dari browser
  * biasa (lihat app/components/gate-app.tsx).
  *
- * SEMENTARA dinyalain buat ngerjain tampilannya. Matiin dengan ganti ke false —
- * atau taruh NEXT_PUBLIC_GATE_APP=0 di .env.local kalau mau matiin cuma di
- * mesin sendiri tanpa nyentuh kode.
+ * Default: MATI waktu `next dev`, NYALA waktu sudah di-build. Alasannya bukan
+ * cuma kenyamanan — install PWA cuma jalan di HTTPS atau localhost, jadi di dev
+ * (apalagi kalau dibuka dari HP lewat IP jaringan) gate-nya cuma jadi jalan
+ * buntu: nggak bisa masang, nggak bisa lanjut.
+ *
+ * Bisa dipaksa lewat .env.local kalau mau ngetes tampilannya:
+ *   NEXT_PUBLIC_GATE_APP=1  → nyala walau lagi dev
+ *   NEXT_PUBLIC_GATE_APP=0  → mati walau sudah production
  */
-export const GATE_APP_AKTIF = process.env.NEXT_PUBLIC_GATE_APP !== "0";
+const paksaGate = process.env.NEXT_PUBLIC_GATE_APP;
+
+export const GATE_APP_AKTIF =
+  paksaGate === "1" ||
+  (paksaGate !== "0" && process.env.NODE_ENV === "production");
